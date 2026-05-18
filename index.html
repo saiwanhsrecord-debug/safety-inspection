@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
 /* ─── DESIGN TOKENS ─── */
 :root, [data-theme="light"] {
   --color-bg: #f4f6f9;
@@ -209,10 +208,6 @@ input, select, textarea { font: inherit; color: inherit; }
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border);
   cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   display: flex; flex-direction: column;
 }
@@ -502,8 +497,6 @@ input, select, textarea { font: inherit; color: inherit; }
   padding: var(--space-4) var(--space-6); border-radius: var(--radius-lg);
   font-size: var(--text-sm); font-weight: 700;
   background: var(--color-primary); color: white;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
   transition: background var(--transition);
 }
 .btn-primary:hover { background: var(--color-primary-hover); }
@@ -511,8 +504,6 @@ input, select, textarea { font: inherit; color: inherit; }
   padding: var(--space-3) var(--space-6); border-radius: var(--radius-lg);
   font-size: var(--text-sm); font-weight: 600;
   border: 1.5px solid var(--color-border);
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
   color: var(--color-text-muted);
   transition: all var(--transition);
 }
@@ -674,218 +665,49 @@ input, select, textarea { font: inherit; color: inherit; }
 .toast-loading .toast-icon { color: var(--color-primary); }
 
 
-/* ─── PRINT STYLES ─── */
-#print-report { display: none; }
-@media print {
-  .app-header, .app-main, .app-footer,
-  .modal-overlay, .email-toast { display: none !important; }
-  #print-report {
-    display: block !important;
-    font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
-    font-size: 13px; color: #111; padding: 0; margin: 0;
-  }
-  #print-report h1 { font-size: 18px; margin-bottom: 6px; }
-  #print-report .pr-meta { font-size: 12px; color: #555; margin-bottom: 16px; padding: 8px 12px; background: #f5f5f5; line-height: 1.8; }
-  #print-report .pr-summary { display: flex; gap: 12px; margin-bottom: 16px; }
-  #print-report .pr-stat { padding: 8px 14px; border-radius: 6px; text-align: center; border: 1px solid #ddd; }
-  #print-report .pr-stat b { font-size: 20px; display: block; }
-  #print-report table { width: 100%; border-collapse: collapse; }
-  #print-report td, #print-report th { border: 1px solid #ccc; padding: 6px 10px; }
-  #print-report th { background: #333; color: white; }
-  #print-report .pr-warn { background: #fef2f2; border: 2px solid #dc2626; border-radius: 6px; padding: 12px; margin-bottom: 16px; }
-  #print-report .pr-footer { font-size: 10px; color: #999; margin-top: 14px; border-top: 1px solid #ddd; padding-top: 8px; }
-}
-
-/* ─── EMAIL MODAL ─── */
-.email-modal {
-  background: var(--color-surface);
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-lg);
-  max-width: 540px; width: 100%;
-  max-height: 85dvh;
-  overflow: hidden;
-  display: flex; flex-direction: column;
-  animation: slideUpModal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.email-modal-header {
-  background: linear-gradient(135deg, #1a5fb4 0%, #0d3880 100%);
-  padding: var(--space-5) var(--space-6);
-  color: white; flex-shrink: 0;
-  display: flex; align-items: center; gap: var(--space-3);
-}
-.email-modal-header svg { width: 22px; height: 22px; flex-shrink: 0; }
-.email-modal-header h3 { font-size: var(--text-base); font-weight: 700; }
-.email-modal-header p { font-size: var(--text-xs); opacity: 0.85; margin-top: 2px; }
-.email-modal-body { padding: var(--space-5) var(--space-5) 0; overflow-y: auto; flex: 1; }
-.email-modal-body label { font-size: var(--text-xs); font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: var(--space-2); }
-.email-preview {
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  font-size: var(--text-xs);
-  font-family: monospace;
-  white-space: pre-wrap;
-  word-break: break-word;
-  max-height: 260px;
-  overflow-y: auto;
-  color: var(--color-text);
-  line-height: 1.6;
-  margin-bottom: var(--space-4);
-}
-.email-to-field {
-  background: var(--color-primary-highlight);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--text-sm); font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: var(--space-4);
-  display: flex; align-items: center; gap: var(--space-2);
-}
-.email-modal-footer {
-  padding: var(--space-4) var(--space-5) var(--space-5);
-  display: flex; flex-direction: column; gap: var(--space-3);
-  flex-shrink: 0;
-  border-top: 1px solid var(--color-divider);
-}
-.copy-success-badge {
-  display: inline-flex; align-items: center; gap: var(--space-1);
-  background: var(--color-success-highlight);
-  color: var(--color-success);
-  border-radius: var(--radius-full);
-  padding: 2px var(--space-3);
-  font-size: var(--text-xs); font-weight: 600;
-  opacity: 0; transition: opacity 0.3s;
-}
-.copy-success-badge.show { opacity: 1; }
-
-
-/* ─── SETUP MODAL ─── */
-.setup-modal {
-  background: var(--color-surface); border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-lg); max-width: 580px; width: 100%;
-  max-height: 88dvh; overflow: hidden; display: flex; flex-direction: column;
-  animation: slideUpModal 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-.setup-header {
-  background: linear-gradient(135deg,#1a5fb4 0%,#0d3880 100%);
-  padding: var(--space-5) var(--space-6); color: white; flex-shrink: 0;
-}
-.setup-header h2 { font-size: var(--text-lg); font-weight: 800; margin-bottom: 4px; }
-.setup-header p { font-size: var(--text-xs); opacity: 0.85; }
-.setup-body { padding: var(--space-5) var(--space-6); overflow-y: auto; flex: 1; }
-.setup-step {
-  display: flex; gap: var(--space-4); margin-bottom: var(--space-5);
-  padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-divider);
-}
-.setup-step:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.step-num {
-  width: 30px; height: 30px; border-radius: var(--radius-full);
-  background: var(--color-primary); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: var(--text-sm); font-weight: 800; flex-shrink: 0; margin-top: 2px;
-}
-.step-content h4 { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-2); }
-.step-content p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
-.step-content code {
-  display: inline-block; background: var(--color-surface-offset);
-  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
-  padding: 2px 8px; font-size: var(--text-xs); font-family: monospace;
-  word-break: break-all; margin-top: var(--space-2);
-}
-.url-input-wrap { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
-.url-input {
-  flex: 1; padding: var(--space-3) var(--space-4);
-  border: 1.5px solid var(--color-border); border-radius: var(--radius-md);
-  background: var(--color-surface-2); font-size: var(--text-sm);
-  transition: border-color var(--transition);
-}
-.url-input:focus { outline: none; border-color: var(--color-primary); }
-.url-save-btn {
-  padding: var(--space-3) var(--space-5); border-radius: var(--radius-md);
-  background: var(--color-primary); color: white;
-  font-size: var(--text-sm); font-weight: 700;
-  transition: background var(--transition);
-  white-space: nowrap;
-}
-.url-save-btn:hover { background: var(--color-primary-hover); }
-.setup-footer { padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-divider); flex-shrink: 0; }
+/* GAS Status Bar */
 .gas-status-bar {
-  display: flex; align-items: center; gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 9999px;
   font-size: var(--text-xs); font-weight: 600;
   border: 1px solid var(--color-border);
   background: var(--color-surface-offset);
   cursor: pointer; transition: all var(--transition);
+  white-space: nowrap;
 }
 .gas-status-bar:hover { border-color: var(--color-primary); color: var(--color-primary); }
-.status-dot {
-  width: 8px; height: 8px; border-radius: var(--radius-full);
-  background: var(--color-warning); flex-shrink: 0;
-}
-.status-dot.connected { background: var(--color-success); }
-/* ─── SUBMISSION OVERLAY ─── */
-.submitting-overlay {
-  position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: var(--space-4);
-}
-.submitting-overlay.hidden { display: none; }
-.submitting-card {
-  background: var(--color-surface); border-radius: var(--radius-2xl);
-  padding: var(--space-8) var(--space-10); text-align: center;
-  box-shadow: var(--shadow-lg);
-}
-.spinner {
-  width: 44px; height: 44px; border-radius: 50%;
-  border: 4px solid var(--color-primary-highlight);
-  border-top-color: var(--color-primary);
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto var(--space-4);
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-/* ─── PRINT ─── */
-#print-report { display: none; }
-@media print {
-  .app-header,.app-main,.app-footer,.modal-overlay,.email-toast,.submitting-overlay { display: none !important; }
-  #print-report {
-    display: block !important;
-    font-family: 'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
-    font-size: 13px; color: #111; padding: 0; margin: 0;
-  }
-  #print-report h1 { font-size: 18px; margin-bottom: 6px; }
-  #print-report .pr-meta { font-size: 12px; color: #555; margin-bottom: 16px; padding: 8px 12px; background: #f5f5f5; line-height: 1.8; }
-  #print-report .pr-summary { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-  #print-report .pr-stat { padding: 8px 14px; border-radius: 6px; border: 1px solid #ddd; text-align: center; }
-  #print-report .pr-stat b { font-size: 20px; display: block; }
-  #print-report table { width: 100%; border-collapse: collapse; }
-  #print-report td, #print-report th { border: 1px solid #ccc; padding: 6px 10px; }
-  #print-report th { background: #333; color: white; }
-  #print-report .pr-warn { background: #fef2f2; border: 2px solid #dc2626; border-radius: 6px; padding: 12px; margin-bottom: 16px; }
-  #print-report .pr-footer { font-size: 10px; color: #999; margin-top: 14px; border-top: 1px solid #ddd; padding-top: 8px; }
-}
+.status-dot { width: 8px; height: 8px; border-radius: 9999px; background: #d97706; flex-shrink: 0; }
 
-/* Mobile: ensure card child elements don't intercept touch */
-.inspection-card .card-image-wrap,
-.inspection-card .card-content,
-.inspection-card .card-image-wrap *,
-.inspection-card .card-content * {
-  pointer-events: none;
+/* Setup Modal */
+.setup-modal {
+  background: var(--color-surface); border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg); max-width: 560px; width: 100%;
+  max-height: 88dvh; overflow: hidden; display: flex; flex-direction: column;
+  animation: slideUpModal 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
-.inspection-card .card-start-btn {
-  pointer-events: auto;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-/* Status buttons */
-.status-btn {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
+.setup-header { background: linear-gradient(135deg,#1a5fb4 0%,#0d3880 100%); padding: var(--space-5) var(--space-6); color: white; flex-shrink: 0; }
+.setup-header h2 { font-size: var(--text-base); font-weight: 800; margin-bottom: 4px; }
+.setup-header p { font-size: var(--text-xs); opacity: 0.85; }
+.setup-body { padding: var(--space-5) var(--space-6); overflow-y: auto; flex: 1; }
+.setup-step { display: flex; gap: var(--space-4); margin-bottom: var(--space-5); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-divider); }
+.setup-step:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.step-num { width: 28px; height: 28px; border-radius: 9999px; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: var(--text-xs); font-weight: 800; flex-shrink: 0; margin-top: 3px; }
+.step-content h4 { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-2); }
+.step-content p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+.url-input-wrap { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
+.url-input { flex: 1; padding: var(--space-3) var(--space-4); border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-2); font-size: var(--text-sm); }
+.url-input:focus { outline: none; border-color: var(--color-primary); }
+.url-save-btn { padding: var(--space-3) var(--space-5); border-radius: var(--radius-md); background: var(--color-primary); color: white; font-size: var(--text-sm); font-weight: 700; white-space: nowrap; cursor: pointer; border: none; }
+.url-save-btn:hover { background: var(--color-primary-hover); }
+.setup-footer { padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-divider); flex-shrink: 0; }
+
+/* Submitting Overlay */
+.submitting-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.45); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; }
+.submitting-overlay.hidden { display: none; }
+.submitting-card { background: var(--color-surface); border-radius: var(--radius-2xl); padding: var(--space-8) var(--space-10); text-align: center; box-shadow: var(--shadow-lg); }
+.spinner { width: 42px; height: 42px; border-radius: 50%; border: 4px solid var(--color-primary-highlight); border-top-color: var(--color-primary); animation: spin 0.8s linear infinite; margin: 0 auto var(--space-4); }
+@keyframes spin { to { transform: rotate(360deg); } }
+#emailStatusMsg { font-size: var(--text-xs); margin-bottom: var(--space-4); min-height: 20px; }
 
 </style>
 </head>
@@ -907,11 +729,11 @@ input, select, textarea { font: inherit; color: inherit; }
       </div>
     </div>
     <div class="header-actions">
-      <div class="header-meta" id="headerDate"></div>
-      <button class="gas-status-bar" onclick="openSetupModal()" title="設定 Google Sheets 連線">
+      <button class="gas-status-bar" onclick="openSetupModal()" type="button">
         <span class="status-dot" id="statusDot"></span>
-        <span id="statusLabel">設定記錄傳送</span>
+        <span id="statusLabel">⚙️ 設定記錄傳送</span>
       </button>
+      <div class="header-meta" id="headerDate"></div>
       <button class="theme-toggle" data-theme-toggle aria-label="切換深色模式">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
@@ -921,7 +743,9 @@ input, select, textarea { font: inherit; color: inherit; }
     </div>
   </header>
 
+  <!-- MAIN -->
   <main class="app-main">
+
     <!-- ═══ HOME VIEW ═══ -->
     <section class="view active" id="view-home">
       <div class="home-hero">
@@ -943,7 +767,7 @@ input, select, textarea { font: inherit; color: inherit; }
         <div class="inspection-grid">
 
           <!-- FIRE EXTINGUISHER -->
-          <div class="inspection-card card-fire" onclick="openChecklist('fire')" ontouchend="event.preventDefault();openChecklist('fire')"  tabindex="0" role="button" aria-label="滅火器檢查">
+          <div class="inspection-card card-fire" onclick="openChecklist('fire')" tabindex="0" role="button" aria-label="滅火器檢查">
             <div class="card-image-wrap">
               <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20260%22%20width%3D%22200%22%20height%3D%22260%22%3E%0A%20%20%3C%21--%20Handle/top%20--%3E%0A%20%20%3Crect%20x%3D%2285%22%20y%3D%2215%22%20width%3D%2230%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22%23555%22/%3E%0A%20%20%3Crect%20x%3D%22105%22%20y%3D%228%22%20width%3D%2212%22%20height%3D%2220%22%20rx%3D%223%22%20fill%3D%22%23555%22/%3E%0A%20%20%3C%21--%20Pressure%20gauge%20--%3E%0A%20%20%3Ccircle%20cx%3D%2288%22%20cy%3D%2252%22%20r%3D%2214%22%20fill%3D%22white%22%20stroke%3D%22%23555%22%20stroke-width%3D%222%22/%3E%0A%20%20%3Ccircle%20cx%3D%2288%22%20cy%3D%2252%22%20r%3D%2210%22%20fill%3D%22%23eee%22/%3E%0A%20%20%3Cline%20x1%3D%2288%22%20y1%3D%2252%22%20x2%3D%2288%22%20y2%3D%2244%22%20stroke%3D%22%23333%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%3C%21--%20Body%20--%3E%0A%20%20%3Crect%20x%3D%2260%22%20y%3D%2255%22%20width%3D%2280%22%20height%3D%22145%22%20rx%3D%2240%22%20fill%3D%22%23e53e3e%22/%3E%0A%20%20%3Crect%20x%3D%2260%22%20y%3D%2255%22%20width%3D%2280%22%20height%3D%2240%22%20rx%3D%2220%22%20fill%3D%22%23f56565%22/%3E%0A%20%20%3C%21--%20Highlight%20--%3E%0A%20%20%3Crect%20x%3D%2268%22%20y%3D%2262%22%20width%3D%2222%22%20height%3D%2280%22%20rx%3D%2211%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%3C%21--%20Label%20box%20--%3E%0A%20%20%3Crect%20x%3D%2268%22%20y%3D%22115%22%20width%3D%2264%22%20height%3D%2255%22%20rx%3D%226%22%20fill%3D%22white%22/%3E%0A%20%20%3C%21--%20Flame%20on%20label%20--%3E%0A%20%20%3Cpath%20d%3D%22M100%20162%20Q92%20152%2096%20142%20Q100%20150%20104%20143%20Q108%20152%20100%20162Z%22%20fill%3D%22%23f6ad55%22/%3E%0A%20%20%3Cpath%20d%3D%22M100%20160%20Q94%20152%2097%20145%20Q100%20152%20103%20147%20Q106%20154%20100%20160Z%22%20fill%3D%22%23f6e05e%22/%3E%0A%20%20%3C%21--%20Strap%20--%3E%0A%20%20%3Crect%20x%3D%2258%22%20y%3D%22170%22%20width%3D%2284%22%20height%3D%2212%22%20rx%3D%226%22%20fill%3D%22%23555%22/%3E%0A%20%20%3C%21--%20Hose%20--%3E%0A%20%20%3Cpath%20d%3D%22M60%2075%20Q30%2090%2025%20120%20Q20%20145%2040%20155%22%20stroke%3D%22%23555%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%3C%21--%20Nozzle%20--%3E%0A%20%20%3Crect%20x%3D%2232%22%20y%3D%22150%22%20width%3D%2220%22%20height%3D%2210%22%20rx%3D%224%22%20fill%3D%22%23444%22%20transform%3D%22rotate%28-30%2C42%2C155%29%22/%3E%0A%20%20%3C%21--%20Bottom%20--%3E%0A%20%20%3Crect%20x%3D%2265%22%20y%3D%22192%22%20width%3D%2270%22%20height%3D%2212%22%20rx%3D%226%22%20fill%3D%22%23c53030%22/%3E%0A%20%20%3C%21--%20Shadow%20--%3E%0A%20%20%3Cellipse%20cx%3D%22100%22%20cy%3D%22215%22%20rx%3D%2250%22%20ry%3D%227%22%20fill%3D%22rgba%280%2C0%2C0%2C0.1%29%22/%3E%0A%3C/svg%3E" 
                    alt="滅火器" width="600" height="400" loading="lazy"
@@ -965,7 +789,7 @@ input, select, textarea { font: inherit; color: inherit; }
           </div>
 
           <!-- FIRST AID BOX -->
-          <div class="inspection-card card-firstaid" onclick="openChecklist('firstaid')" ontouchend="event.preventDefault();openChecklist('firstaid')"  tabindex="0" role="button" aria-label="急救箱檢查">
+          <div class="inspection-card card-firstaid" onclick="openChecklist('firstaid')" tabindex="0" role="button" aria-label="急救箱檢查">
             <div class="card-image-wrap">
               <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAnKgAwAEAAAAAQAAAWYAAAAA/+0AOFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAAAAOEJJTQQlAAAAAAAQ1B2M2Y8AsgTpgAmY7PhCfv/AABEIAWYCcgMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2wBDAAEBAQEBAQIBAQIDAgICAwMDAwMDAwQDAwMDAwQFBAQEBAQEBQUFBQUFBQUGBgYGBgYHBwcHBwgICAgICAgICAj/2wBDAQEBAQICAgQCAgQJBgUGCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQn/3QAEACj/2gAMAwEAAhEDEQA/AP7+KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Q/v4ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9H+/iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACk4Apa/gm/4OaP+DgvxT8P/ABHr3/BOX9iLWpNN1G1R7Lxv4ls5THdQzSqVk0fTriMhoniH/H5KhDhm8hChjnDAH7P/APBSz/g5o/YD/wCCfGu33wu8OzzfFXx/p7iK40bw9PD9hsJsEmLUdXcvBA4IMckUMdxPE3EkSZGf5QfjT/weZ/8ABRzxvqQX4O+EvBvgjTVcGNGtLzWdRUZ6Pcz3EVs/HGRar7+/8gLMWOTTaAP6af8AiLZ/4LKbs/8ACV+Hsf8AYp6fnH1xR/xFtf8ABZPd/wAjV4ex/wBipp+cflX8y1FAH9NP/EW1/wAFk93/ACNXh7H/AGKmn5x+VH/EW1/wWT3f8jV4ex/2Kmn5x+VfzLUUAf00/wDEWz/wWU3Z/wCEr8PY/wCxT0/OPrio/wDiLX/4LJbs/wDCV+HsZ/6FPT84+uK/maooA/pl/wCItf8A4LJbs/8ACV+HsZ/6FPT84+uKeP8Ag7Z/4LKBs/8ACV+Hsf8AYqaeOPyNfzL0UAf00/8AEW1/wWT3f8jV4ex/2Kmn5x+VH/EW1/wWT3f8jV4ex/2Kmn5x+VfzLUUAf1bfDn/g8O/4KweEdbjv/GEHg3xTZ5Akt73QZbclcnPlvp13aBTz1YN/LH9G/wDwT7/4PAP2Of2htW0/4cfti6FP8HtcuQsS6qbr+1PDUsgHWe6EcM1kZDgDzIXiQZL3C8V/mJUvKmgD/fa8PeI9A8XaHa+JvC95BqWn30UdxbXVrKlxbXEEyh45YZoyUkR1IKsp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8QSP7IWM/wDC5fGOfT7BpOM/9+/6Uf8AEEj+yFjP/C5fGOfT7BpOM/8Afv8ApX9tVFAH8Sv/ABBI/shYz/wuXxjn0+waTjP/AH7/AKUf8QSP7IWM/wDC5fGOfT7BpOM/9+/6V/bVRQB/Er/xBI/shYz/AMLl8Y59PsGk4z/37/pR/wAQSP7IWM/8Ll8Y59PsGk4z/wB+/wClf21UUAfxK/8AEEj+yFjP/C5fGOfT7BpOM/8Afv8ApR/xBI/shYz/AMLl8Y59PsGk4z/37/pX9tVFAH8Sv/EEj+yFjP8AwuXxjn0+waTjP/fv+lH/ABBI/shYz/wuXxjn0+waTjP/AH7/AKV/bVRQB/Er/wAQSP7IWM/8Ll8Y59PsGk4z/wB+/wClH/EEj+yFjP8AwuXxjn0+waTjP/fv+lf21UUAfxK/8QSP7IWM/wDC5fGOfT7BpOM/9+/6Uf8AEEj+yFjP/C5fGOfT7BpOM/8Afv8ApX9tVFAH8Sv/ABBI/shYz/wuXxjn0+waTjP/AH7/AKUjf8GSP7I+Pl+M3i/P/YP0rGf+/df210UAfxJ/8QSf7JWM/wDC5vF+f+wfpPX/AL90f8QSf7JWM/8AC5vF+f8AsH6T1/791/bZRQB/En/xBJ/slYz/AMLm8X5/7B+k9f8Av3R/xBJ/slYz/wALm8X5/wCwfpPX/v3X9tlFAH8SS/8ABkl+yPj5vjL4wz/14aVjP18r/PpT/wDiCR/ZCxn/AIXL4xz6fYNJxn/v3/Sv7aqKAP4n7L/gyU/Y0SZG1P4w+NJIv4litdJjf/vs27/yr9NP2Uf+DXH/AIJHfswara+JL/wdefEnVbQI0dx4xvRqcKuDkltPt4rXTpQSBxNauR2I4x/RZRQBj6HoejeHNLt9D0C0isLO0jWGC3gjWGGKGMYVI40AVVA4AAAA6AVsUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf//U/v4ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9X+/iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q=="
                    alt="急救箱" width="600" height="400" loading="lazy"
@@ -987,7 +811,7 @@ input, select, textarea { font: inherit; color: inherit; }
           </div>
 
           <!-- EYE WASHER -->
-          <div class="inspection-card card-eyewash" onclick="openChecklist('eyewash')" ontouchend="event.preventDefault();openChecklist('eyewash')"  tabindex="0" role="button" aria-label="洗眼器檢查">
+          <div class="inspection-card card-eyewash" onclick="openChecklist('eyewash')" tabindex="0" role="button" aria-label="洗眼器檢查">
             <div class="card-image-wrap">
               <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20240%20280%22%20width%3D%22240%22%20height%3D%22280%22%3E%0A%20%20%3C%21--%20Eye%20shape%20--%3E%0A%20%20%3Cellipse%20cx%3D%22120%22%20cy%3D%2290%22%20rx%3D%2290%22%20ry%3D%2255%22%20fill%3D%22%23b3ecf7%22/%3E%0A%20%20%3Cpath%20d%3D%22M30%2C90%20Q120%2C30%20210%2C90%20Q120%2C150%2030%2C90Z%22%20fill%3D%22%23a8e6f5%22%20opacity%3D%220.5%22/%3E%0A%20%20%3C%21--%20Iris%20--%3E%0A%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2290%22%20r%3D%2235%22%20fill%3D%22%237c3aed%22/%3E%0A%20%20%3C%21--%20Pupil%20--%3E%0A%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2290%22%20r%3D%2218%22%20fill%3D%22%234c1d95%22/%3E%0A%20%20%3C%21--%20Highlight%20on%20eye%20--%3E%0A%20%20%3Cellipse%20cx%3D%22100%22%20cy%3D%2272%22%20rx%3D%2214%22%20ry%3D%228%22%20fill%3D%22white%22%20opacity%3D%220.7%22%20transform%3D%22rotate%28-20%2C100%2C72%29%22/%3E%0A%20%20%3C%21--%20Water%20drops%20row%201%20--%3E%0A%20%20%3Ccircle%20cx%3D%2278%22%20cy%3D%22158%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22104%22%20cy%3D%22164%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22136%22%20cy%3D%22164%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22162%22%20cy%3D%22158%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3C%21--%20Water%20drops%20row%202%20--%3E%0A%20%20%3Ccircle%20cx%3D%2288%22%20cy%3D%22185%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22112%22%20cy%3D%22191%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22136%22%20cy%3D%22191%22%20r%3D%229%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3C%21--%20Side%20drops%20--%3E%0A%20%20%3Ccircle%20cx%3D%2246%22%20cy%3D%2295%22%20r%3D%228%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%22194%22%20cy%3D%2295%22%20r%3D%228%22%20fill%3D%22%2300bcd4%22/%3E%0A%20%20%3Ccircle%20cx%3D%2258%22%20cy%3D%22128%22%20r%3D%227%22%20fill%3D%22%2300bcd4%22%20opacity%3D%220.7%22/%3E%0A%20%20%3Ccircle%20cx%3D%22182%22%20cy%3D%22128%22%20r%3D%227%22%20fill%3D%22%2300bcd4%22%20opacity%3D%220.7%22/%3E%0A%20%20%3C%21--%20Nozzle%20body%20--%3E%0A%20%20%3Crect%20x%3D%22100%22%20y%3D%22205%22%20width%3D%2240%22%20height%3D%2220%22%20rx%3D%226%22%20fill%3D%22%237c3aed%22/%3E%0A%20%20%3Crect%20x%3D%22108%22%20y%3D%22218%22%20width%3D%2224%22%20height%3D%2230%22%20rx%3D%225%22%20fill%3D%22%236d28d9%22/%3E%0A%20%20%3C%21--%20Nozzle%20outlet%20--%3E%0A%20%20%3Crect%20x%3D%22104%22%20y%3D%22240%22%20width%3D%2232%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%235b21b6%22/%3E%0A%20%20%3C%21--%20Shadow%20--%3E%0A%20%20%3Cellipse%20cx%3D%22120%22%20cy%3D%22268%22%20rx%3D%2245%22%20ry%3D%226%22%20fill%3D%22rgba%280%2C0%2C0%2C0.12%29%22/%3E%0A%3C/svg%3E"
                    alt="洗眼器" width="600" height="400" loading="lazy"
@@ -1009,7 +833,7 @@ input, select, textarea { font: inherit; color: inherit; }
           </div>
 
           <!-- LADDER -->
-          <div class="inspection-card card-ladder" onclick="openChecklist('ladder')" ontouchend="event.preventDefault();openChecklist('ladder')"  tabindex="0" role="button" aria-label="梯子檢查">
+          <div class="inspection-card card-ladder" onclick="openChecklist('ladder')" tabindex="0" role="button" aria-label="梯子檢查">
             <div class="card-image-wrap">
               <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20280%22%20width%3D%22200%22%20height%3D%22280%22%3E%0A%20%20%3C%21--%20Left%20rail%20--%3E%0A%20%20%3Crect%20x%3D%2230%22%20y%3D%2220%22%20width%3D%2218%22%20height%3D%22220%22%20rx%3D%224%22%20fill%3D%22%23c8903c%22%20transform%3D%22rotate%28-8%2C39%2C130%29%22/%3E%0A%20%20%3C%21--%20Right%20rail%20--%3E%0A%20%20%3Crect%20x%3D%22140%22%20y%3D%2220%22%20width%3D%2218%22%20height%3D%22220%22%20rx%3D%224%22%20fill%3D%22%23d9a94e%22%20transform%3D%22rotate%288%2C149%2C130%29%22/%3E%0A%20%20%3C%21--%20Steps%20--%3E%0A%20%20%3Crect%20x%3D%2240%22%20y%3D%2255%22%20width%3D%22120%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23e8b85a%22/%3E%0A%20%20%3Crect%20x%3D%2242%22%20y%3D%2293%22%20width%3D%22116%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23d9a94e%22/%3E%0A%20%20%3Crect%20x%3D%2244%22%20y%3D%22131%22%20width%3D%22112%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23e8b85a%22/%3E%0A%20%20%3Crect%20x%3D%2246%22%20y%3D%22169%22%20width%3D%22108%22%20height%3D%2214%22%20rx%3D%223%22%20fill%3D%22%23d9a94e%22/%3E%0A%20%20%3C%21--%20Top%20platform%20--%3E%0A%20%20%3Crect%20x%3D%2228%22%20y%3D%2225%22%20width%3D%22144%22%20height%3D%2218%22%20rx%3D%225%22%20fill%3D%22%23c07a30%22/%3E%0A%20%20%3C%21--%20Back%20rails%20%28lighter%29%20--%3E%0A%20%20%3Crect%20x%3D%22100%22%20y%3D%2255%22%20width%3D%2212%22%20height%3D%22185%22%20rx%3D%223%22%20fill%3D%22%23c8903c%22%20transform%3D%22rotate%2812%2C106%2C148%29%22/%3E%0A%20%20%3Crect%20x%3D%2288%22%20y%3D%2255%22%20width%3D%2212%22%20height%3D%22185%22%20rx%3D%223%22%20fill%3D%22%23d9a94e%22%20transform%3D%22rotate%28-12%2C94%2C148%29%22/%3E%0A%20%20%3C%21--%20Back%20steps%20--%3E%0A%20%20%3Crect%20x%3D%2290%22%20y%3D%22110%22%20width%3D%2220%22%20height%3D%229%22%20rx%3D%222%22%20fill%3D%22%23aaa%22%20opacity%3D%220.7%22/%3E%0A%20%20%3Crect%20x%3D%2288%22%20y%3D%22148%22%20width%3D%2224%22%20height%3D%229%22%20rx%3D%222%22%20fill%3D%22%23aaa%22%20opacity%3D%220.7%22/%3E%0A%20%20%3C%21--%20Shadow%20--%3E%0A%20%20%3Cellipse%20cx%3D%22100%22%20cy%3D%22265%22%20rx%3D%2270%22%20ry%3D%228%22%20fill%3D%22rgba%280%2C0%2C0%2C0.1%29%22/%3E%0A%3C/svg%3E"
                    alt="梯子" width="600" height="400" loading="lazy"
@@ -1029,12 +853,66 @@ input, select, textarea { font: inherit; color: inherit; }
               </div>
             </div>
           </div>
+          <!-- SMOKE DETECTOR -->
+          <div class="inspection-card card-fire" onclick="openChecklist('smoke')" tabindex="0" role="button" aria-label="煙霧探測器檢查">
+            <div class="card-image-wrap">
+              <div class="img-placeholder" style="background:var(--color-fire-bg);color:var(--color-fire);height:100%;">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="11" r="6"></circle>
+                  <path d="M12 5v2"></path>
+                  <path d="M8 11h8"></path>
+                  <path d="M9 15h6"></path>
+                  <path d="M7 19c1.2-1 2.8-1.5 5-1.5s3.8.5 5 1.5"></path>
+                </svg>
+                <span>煙霧探測器</span>
+              </div>
+              <span class="card-category-badge">消防安全</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-number">05 · SMOKE DETECTOR</div>
+              <h3 class="card-title">煙霧探測器</h3>
+              <p class="card-desc">檢查安裝位置、指示燈、電池狀況及測試功能，確保警報正常運作</p>
+              <div class="card-start-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                開始檢查
+              </div>
+            </div>
+          </div>
 
+          <!-- ELECTRICITY BOX -->
+          <div class="inspection-card card-ladder" onclick="openChecklist('electricity')" tabindex="0" role="button" aria-label="電箱檢查">
+            <div class="card-image-wrap">
+              <div class="img-placeholder" style="background:var(--color-ladder-bg);color:var(--color-ladder);height:100%;">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="6" y="3.5" width="12" height="17" rx="2"></rect>
+                  <path d="M9 8.5h6"></path>
+                  <path d="M9 12h6"></path>
+                  <path d="M12 16h.01"></path>
+                </svg>
+                <span>電箱</span>
+              </div>
+              <span class="card-category-badge">電力安全</span>
+              <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-number">06 · ELECTRICITY BOX</div>
+              <h3 class="card-title">電箱</h3>
+              <p class="card-desc">檢查電箱外觀、標示及保護裝置，重點確認 RCB/RCD 測試功能是否正常</p>
+              <div class="card-start-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                開始檢查
+              </div>
+            </div>
+          </div>
         </div><!-- /inspection-grid -->
       </div><!-- /home-content -->
     </section>
 
-    
     <!-- ═══ CHECKLIST VIEW ═══ -->
     <section class="view" id="view-checklist">
       <div class="checklist-header">
@@ -1114,41 +992,41 @@ input, select, textarea { font: inherit; color: inherit; }
       </div>
     </section>
 
-    
-
     <!-- ═══ SUCCESS VIEW ═══ -->
     <section class="view" id="view-success">
       <div class="success-view">
         <div class="success-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
         </div>
-        <h2 class="success-title" id="successTitle">巡查記錄已提交！</h2>
-        <p class="success-desc" id="successDesc">本次巡查已完成。</p>
-        <div id="emailStatusMsg" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-4);"></div>
+        <h2 class="success-title">巡查記錄已提交！</h2>
+        <p class="success-desc" id="successDesc">本次巡查已完成。感謝您認真執行職場安全檢查。</p>
+        <p id="emailStatusMsg"></p>
         <div class="success-actions">
-          <button class="btn-primary" onclick="printReport()" style="display:flex;align-items:center;justify-content:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            🖨️ 列印 / 儲存報告
+          <button class="btn-primary" onclick="printReport()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:6px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            列印 / 儲存報告
           </button>
-          <button class="btn-outline" onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <button class="btn-outline" onclick="goHome()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             返回主頁
           </button>
         </div>
       </div>
     </section>
 
+
     <!-- ═══ WARNING MODAL ═══ -->
-    <div class="modal-overlay hidden" id="warningModal" role="dialog" aria-modal="true">
+    <div class="modal-overlay hidden" id="warningModal" role="dialog" aria-modal="true" aria-labelledby="warningModalTitle">
       <div class="warning-modal">
         <div class="warning-modal-header">
           <div class="warning-modal-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
           </div>
-          <h2>⚠️ 發現不合格項目！</h2>
+          <h2 id="warningModalTitle">⚠️ 發現不合格項目！</h2>
           <p id="warningModalSubtitle">請即停止使用相關設備</p>
         </div>
         <div class="warning-modal-body">
@@ -1165,16 +1043,16 @@ input, select, textarea { font: inherit; color: inherit; }
               即時處理步驟
             </h4>
             <ol>
-              <li><strong>立即停止使用</strong>該設備，並張貼「停用」警告標示</li>
+              <li><strong>立即停止使用</strong>該設備，並在設備上張貼「停用」警告標示</li>
               <li><strong>隔離設備</strong>，防止其他員工誤用</li>
-              <li><strong>即時回報</strong>上級主管或部門經理</li>
-              <li>跟進維修，確認合格後方可恢復使用</li>
+              <li><strong>即時回報</strong>上級主管或部門經理，說明不合格情況</li>
+              <li>跟進維修或補充安排，待確認合格後方可恢復使用</li>
             </ol>
           </div>
         </div>
         <div class="warning-modal-footer">
           <button class="btn-danger" onclick="closeWarningAndProceed()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
             我已知悉，繼續提交記錄
           </button>
           <button class="btn-outline" onclick="closeWarningModal()" style="text-align:center;">
@@ -1184,72 +1062,14 @@ input, select, textarea { font: inherit; color: inherit; }
       </div>
     </div>
 
-    <!-- ═══ SETUP MODAL ═══ -->
-    <div class="modal-overlay hidden" id="setupModal" role="dialog" aria-modal="true">
-      <div class="setup-modal">
-        <div class="setup-header">
-          <h2>⚙️ 設定 Google Sheets 自動記錄</h2>
-          <p>完成以下步驟，巡查記錄將自動儲存至 Google Sheets 並發送電郵至 saiwanhsrecord@gmail.com</p>
-        </div>
-        <div class="setup-body">
-          <div class="setup-step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <h4>開啟 Google Apps Script</h4>
-              <p>前往 <strong>script.google.com</strong>，以您的 Google 帳號登入，建立新專案。</p>
-            </div>
-          </div>
-          <div class="setup-step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <h4>貼入附帶的 .gs 腳本</h4>
-              <p>將下載包中的 <strong>inspection-gas-script.gs</strong> 內容全部貼入 Apps Script 編輯器，然後儲存。</p>
-            </div>
-          </div>
-          <div class="setup-step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <h4>連結 Google Sheets</h4>
-              <p>在 Apps Script 中，點擊左側「服務」→ 加入 <strong>Google Sheets API</strong> 及 <strong>Gmail API</strong>。然後在右上角選擇連結到一個新的或現有的 Google Spreadsheet。</p>
-            </div>
-          </div>
-          <div class="setup-step">
-            <div class="step-num">4</div>
-            <div class="step-content">
-              <h4>部署為 Web App</h4>
-              <p>點擊右上角「部署」→「新增部署」→ 類型選 <strong>網頁應用程式</strong>。<br>執行身分：<strong>我</strong>｜存取權：<strong>任何人</strong>。完成後複製 Web App 網址。</p>
-            </div>
-          </div>
-          <div class="setup-step">
-            <div class="step-num">5</div>
-            <div class="step-content">
-              <h4>貼入 Web App 網址</h4>
-              <p>將複製的網址貼入下方，儲存後即可自動傳送記錄。</p>
-              <div class="url-input-wrap">
-                <input type="url" class="url-input" id="gasUrlInput"
-                  placeholder="https://script.google.com/macros/s/...../exec">
-                <button class="url-save-btn" onclick="saveGasUrl()">儲存</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="setup-footer">
-          <button class="btn-outline" onclick="closeSetupModal()" style="width:100%;text-align:center;">關閉</button>
-        </div>
-      </div>
+    <!-- ═══ EMAIL TOAST ═══ -->
+    <div class="email-toast hidden" id="emailToast">
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" id="toastIcon">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 8v4M12 16h.01"/>
+      </svg>
+      <span id="toastMsg">正在傳送記錄...</span>
     </div>
-
-    <!-- SUBMITTING OVERLAY -->
-    <div class="submitting-overlay hidden" id="submittingOverlay">
-      <div class="submitting-card">
-        <div class="spinner"></div>
-        <div style="font-size:var(--text-base);font-weight:600;" id="submittingMsg">正在傳送記錄至 Google Sheets…</div>
-        <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-2);">請稍候</div>
-      </div>
-    </div>
-
-    <!-- PRINT DIV -->
-    <div id="print-report"></div>
 
   </main>
 
@@ -1259,11 +1079,6 @@ input, select, textarea { font: inherit; color: inherit; }
 </div>
 
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────
-const GAS_URL_KEY = 'safety_gas_url';
-let gasUrl = localStorage.getItem(GAS_URL_KEY) || '';
-
-// ─── DATA ──────────────────────────────────────────────────────
 // ─── DATA ───────────────────────────────────────────────────────
 const CHECKLISTS = {
   fire: {
@@ -1365,9 +1180,59 @@ const CHECKLISTS = {
         '最大承重標識清晰可見',
       ]},
     ]
+  },
+  smoke: {
+    title: '煙霧探測器檢查',
+    emoji: '🚨',
+    accentVar: '--color-fire',
+    progressColor: '#dc2626',
+    sections: [
+      { heading: '設備狀況', items: [
+        '煙霧探測器已安裝於指定位置',
+        '探測器外殼完整，沒有破損或鬆脫',
+        '探測器周圍沒有遮擋物',
+        '指示燈顯示正常',
+      ]},
+      { heading: '功能測試', items: [
+        '測試按鈕操作正常',
+        '警報聲響清晰及足夠響亮',
+        '電池／供電狀況正常',
+        '沒有故障或低電量警示',
+      ]},
+      { heading: '標示及保養', items: [
+        '設備標示清晰可辨',
+        '巡查／保養記錄已更新',
+        '設備未超過建議使用期限',
+      ]},
+    ]
+  },
+
+  electricity: {
+    title: '電箱檢查',
+    emoji: '⚡',
+    accentVar: '--color-ladder',
+    progressColor: '#d97706',
+    sections: [
+      { heading: '外觀檢查', items: [
+        '電箱位置容易接近，沒有被雜物阻塞',
+        '電箱門／外蓋完整及可正常關閉',
+        '警告標示及回路標籤清晰可見',
+        '沒有明顯損壞、燒焦痕跡或異味',
+      ]},
+      { heading: '電力安全', items: [
+        '沒有發現鬆脫電線或外露帶電部分',
+        '掣位／斷路器標示清楚',
+        '電箱周圍環境乾爽及整潔',
+      ]},
+      { heading: 'RCB / RCD 測試', items: [
+        '已按下 RCB / RCD 測試掣進行功能測試',
+        '按下測試掣後，RCB / RCD 可正常跳掣',
+        '重設後可恢復正常供電',
+        '任何異常跳掣或失效情況已即時報告',
+      ]},
+    ]
   }
 };
-
 
 // ─── STATE ──────────────────────────────────────────────────────
 let currentType = null;
@@ -1376,13 +1241,15 @@ let itemRemarks = {};
 
 // ─── INIT ────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  updateStatusBar();
+  // Set dates
   const now = new Date();
   const dateStr = now.toLocaleDateString('zh-Hant-HK', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
   document.getElementById('headerDate').textContent = dateStr;
   document.getElementById('homeDateBar').textContent = '今日日期：' + dateStr + '　｜　請記錄本月巡查結果';
   document.getElementById('inspectorDate').value = now.toISOString().split('T')[0];
-  updateStatusBar();
 
+  // Dark mode toggle
   const html = document.documentElement;
   const toggle = document.querySelector('[data-theme-toggle]');
   let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -1395,8 +1262,12 @@ document.addEventListener('DOMContentLoaded', () => {
       updateToggleIcon(toggle, theme);
     });
   }
+
+  // Keyboard navigation for cards
   document.querySelectorAll('.inspection-card').forEach(card => {
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
   });
 });
 
@@ -1408,48 +1279,13 @@ function updateToggleIcon(btn, theme) {
     : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 }
 
-function updateStatusBar() {
-  const dot = document.getElementById('statusDot');
-  const label = document.getElementById('statusLabel');
-  gasUrl = localStorage.getItem(GAS_URL_KEY) || '';
-  if (gasUrl) {
-    dot.classList.add('connected');
-    label.textContent = '✓ 已連接 Google Sheets';
-  } else {
-    dot.classList.remove('connected');
-    label.textContent = '⚙️ 設定記錄傳送';
-  }
-}
-
-// ─── SETUP MODAL ─────────────────────────────────────────────────
-function openSetupModal() {
-  document.getElementById('gasUrlInput').value = localStorage.getItem(GAS_URL_KEY) || '';
-  document.getElementById('setupModal').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-}
-function closeSetupModal() {
-  document.getElementById('setupModal').classList.add('hidden');
-  document.body.style.overflow = '';
-}
-function saveGasUrl() {
-  const val = document.getElementById('gasUrlInput').value.trim();
-  if (val && val.startsWith('https://script.google.com')) {
-    localStorage.setItem(GAS_URL_KEY, val);
-    gasUrl = val;
-    updateStatusBar();
-    closeSetupModal();
-    alert('✓ Google Sheets 連線已儲存！');
-  } else {
-    alert('請輸入有效的 Google Apps Script Web App 網址（應以 https://script.google.com 開頭）');
-  }
-}
-
 // ─── NAVIGATION ──────────────────────────────────────────────────
 function showView(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 function goHome() { showView('view-home'); }
 
 // ─── OPEN CHECKLIST ──────────────────────────────────────────────
@@ -1457,6 +1293,7 @@ function openChecklist(type) {
   currentType = type;
   itemStatus = {};
   itemRemarks = {};
+
   const data = CHECKLISTS[type];
   document.getElementById('checklistTitle').textContent = data.title;
   document.getElementById('checklistSubtitle').textContent = '每月例行安全檢查 · ' + new Date().toLocaleDateString('zh-Hant-HK', {year:'numeric',month:'long'});
@@ -1465,10 +1302,12 @@ function openChecklist(type) {
   badge.style.background = data.progressColor + '22';
   badge.style.fontSize = '24px';
 
+  // Build item ids
   let allItems = [];
   data.sections.forEach((sec, si) => sec.items.forEach((_, ii) => allItems.push(`${si}-${ii}`)));
   allItems.forEach(id => { itemStatus[id] = null; itemRemarks[id] = ''; });
 
+  // Render
   const container = document.getElementById('checklistItems');
   container.innerHTML = '';
   let itemCount = 0;
@@ -1477,6 +1316,7 @@ function openChecklist(type) {
     heading.className = 'checklist-section-title';
     heading.textContent = sec.heading;
     container.appendChild(heading);
+
     sec.items.forEach((text, ii) => {
       itemCount++;
       const id = `${si}-${ii}`;
@@ -1488,14 +1328,17 @@ function openChecklist(type) {
         <div class="item-content">
           <div class="item-text">${text}</div>
           <div class="item-controls">
-            <button class="status-btn pass" onclick="setStatus('${id}','pass')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>合格
+            <button class="status-btn pass" onclick="setStatus('${id}','pass')" aria-label="合格">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              合格
             </button>
-            <button class="status-btn fail" onclick="setStatus('${id}','fail')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>不合格
+            <button class="status-btn fail" onclick="setStatus('${id}','fail')" aria-label="不合格">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              不合格
             </button>
-            <button class="status-btn na" onclick="setStatus('${id}','na')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>不適用
+            <button class="status-btn na" onclick="setStatus('${id}','na')" aria-label="不適用">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>
+              不適用
             </button>
           </div>
           <textarea class="item-remark hidden" id="remark-${id}" placeholder="備註（選填）..." rows="2"
@@ -1515,15 +1358,21 @@ function setStatus(id, status) {
   const prev = itemStatus[id];
   itemStatus[id] = prev === status ? null : status;
   const s = itemStatus[id];
+
   const itemEl = document.getElementById(`item-${id}`);
   itemEl.className = 'checklist-item' + (s ? ' status-' + s : '');
+
+  // Update buttons
   itemEl.querySelectorAll('.status-btn').forEach(btn => {
     btn.classList.remove('active');
-    if (s && btn.classList.contains(s)) btn.classList.add('active');
+    if (btn.classList.contains(s)) btn.classList.add('active');
   });
+
+  // Show remark for fail
   const remark = document.getElementById(`remark-${id}`);
   if (s === 'fail') remark.classList.remove('hidden');
-  else remark.classList.add('hidden');
+  else { remark.classList.add('hidden'); }
+
   updateProgress();
 }
 
@@ -1535,6 +1384,7 @@ function updateProgress() {
   const pass = ids.filter(id => itemStatus[id] === 'pass').length;
   const fail = ids.filter(id => itemStatus[id] === 'fail').length;
   const na = ids.filter(id => itemStatus[id] === 'na').length;
+
   document.getElementById('progressText').textContent = `${answered} / ${total}`;
   document.getElementById('progressFill').style.width = (answered / total * 100) + '%';
   document.getElementById('countPass').textContent = pass;
@@ -1555,18 +1405,25 @@ function submitChecklist() {
   const fail = ids.filter(id => itemStatus[id] === 'fail').length;
   const total = ids.length;
   const name = document.getElementById('inspectorName').value || '（未填）';
-  document.getElementById('successDesc').textContent =
-    `${data.title} 巡查已完成。共 ${total} 項，合格 ${pass} 項，不合格 ${fail} 項。巡查人員：${name}。`;
 
+  // Build success description
+  document.getElementById('successDesc').textContent =
+    `${data.title} 巡查已完成。` +
+    `共 ${total} 項，合格 ${pass} 項，不合格 ${fail} 項。` +
+    `巡查人員：${name}。感謝您認真執行職場安全檢查。`;
+
+  // If there are failed items, show warning modal first
   if (fail > 0) {
     showWarningModal(fail);
   } else {
+    // All pass — go straight to success + send email
     doFinalSubmit();
   }
 }
 
 function showWarningModal(failCount) {
   const data = CHECKLISTS[currentType];
+  // Build fail items list
   const listEl = document.getElementById('failItemsList');
   listEl.innerHTML = '';
   let n = 0;
@@ -1583,98 +1440,109 @@ function showWarningModal(failCount) {
       }
     });
   });
-  document.getElementById('warningModalSubtitle').textContent = `發現 ${failCount} 項不合格，請即停止使用相關設備`;
+  document.getElementById('warningModalSubtitle').textContent =
+    `發現 ${failCount} 項不合格，請即停止使用相關設備`;
   document.getElementById('warningModal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
 }
+
 function closeWarningModal() {
   document.getElementById('warningModal').classList.add('hidden');
   document.body.style.overflow = '';
 }
+
 function closeWarningAndProceed() {
   closeWarningModal();
   doFinalSubmit();
 }
+
+
+
+// ── GOOGLE SHEETS CONFIG ──
+const GAS_URL_KEY = 'safety_gas_url_v2';
+
+function openSetupModal() {
+  document.getElementById('gasUrlInput').value = localStorage.getItem(GAS_URL_KEY) || '';
+  document.getElementById('setupModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeSetupModal() {
+  document.getElementById('setupModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function saveGasUrl() {
+  const val = document.getElementById('gasUrlInput').value.trim();
+  if (val && val.includes('script.google.com')) {
+    localStorage.setItem(GAS_URL_KEY, val);
+    updateStatusBar();
+    closeSetupModal();
+    alert('✓ 已儲存！');
+  } else {
+    alert('請輸入有效的 Apps Script Web App 網址');
+  }
+}
+function updateStatusBar() {
+  const dot = document.getElementById('statusDot');
+  const label = document.getElementById('statusLabel');
+  if (!dot) return;
+  if (localStorage.getItem(GAS_URL_KEY)) {
+    dot.style.background = '#2d8a4e';
+    label.textContent = '✓ 已連接 Google Sheets';
+  } else {
+    dot.style.background = '#d97706';
+    label.textContent = '⚙️ 設定記錄傳送';
+  }
+}
+
 function doFinalSubmit() {
-  sendToGoogleSheets();
-}
-
-// ─── GOOGLE SHEETS SUBMISSION ────────────────────────────────────
-function buildPayload() {
-  const data = CHECKLISTS[currentType];
-  const ids = Object.keys(itemStatus);
-  const pass = ids.filter(id => itemStatus[id] === 'pass').length;
-  const fail = ids.filter(id => itemStatus[id] === 'fail').length;
-  const na   = ids.filter(id => itemStatus[id] === 'na').length;
-
-  let items = [];
-  data.sections.forEach((sec, si) => {
-    sec.items.forEach((text, ii) => {
-      const id = `${si}-${ii}`;
-      items.push({
-        section: sec.heading,
-        text: text,
-        status: itemStatus[id] || 'unanswered',
-        remark: itemRemarks[id] || ''
-      });
-    });
-  });
-
-  return {
-    title: data.title,
-    emoji: data.emoji,
-    inspector: document.getElementById('inspectorName').value || '（未填）',
-    dept: document.getElementById('inspectorDept').value || '（未填）',
-    date: document.getElementById('inspectorDate').value || new Date().toISOString().split('T')[0],
-    location: document.getElementById('inspectorLocation').value || '（未填）',
-    passCount: pass,
-    failCount: fail,
-    naCount: na,
-    total: ids.length,
-    items: items,
-    submittedAt: new Date().toISOString()
-  };
-}
-
-function sendToGoogleSheets() {
   const gasUrl = localStorage.getItem(GAS_URL_KEY) || '';
-
   if (!gasUrl) {
-    // No URL configured — go straight to success with reminder
     showView('view-success');
-    document.getElementById('emailStatusMsg').innerHTML =
-      '<span style="color:var(--color-warning);">⚠️ 尚未設定 Google Sheets 連線，記錄未自動傳送。</span><br>' +
-      '<button onclick="openSetupModal()" style="background:none;border:none;color:var(--color-primary);font-size:var(--text-xs);font-weight:700;cursor:pointer;text-decoration:underline;">立即設定</button>';
+    const msg = document.getElementById('emailStatusMsg');
+    if (msg) msg.innerHTML = '<span style="color:#d97706">⚠️ 尚未設定 Google Sheets，記錄未傳送。</span>';
     return;
   }
-
-  // Show loading overlay
-  document.getElementById('submittingOverlay').classList.remove('hidden');
-  document.getElementById('submittingMsg').textContent = '正在傳送記錄至 Google Sheets…';
-
-  const payload = buildPayload();
-
+  const overlay = document.getElementById('submittingOverlay');
+  if (overlay) overlay.classList.remove('hidden');
+  const data = CHECKLISTS[currentType];
+  const ids = Object.keys(itemStatus);
+  const pass = ids.filter(i=>itemStatus[i]==='pass').length;
+  const fail = ids.filter(i=>itemStatus[i]==='fail').length;
+  const na   = ids.filter(i=>itemStatus[i]==='na').length;
+  let items = [];
+  data.sections.forEach((sec,si)=>{
+    sec.items.forEach((text,ii)=>{
+      const id=`${si}-${ii}`;
+      items.push({section:sec.heading,text,status:itemStatus[id]||'',remark:itemRemarks[id]||''});
+    });
+  });
+  const payload = {
+    title: data.title,
+    inspector: document.getElementById('inspectorName').value||'',
+    dept: document.getElementById('inspectorDept').value||'',
+    date: document.getElementById('inspectorDate').value||'',
+    location: document.getElementById('inspectorLocation').value||'',
+    passCount:pass, failCount:fail, naCount:na, total:ids.length,
+    items, submittedAt: new Date().toISOString()
+  };
   fetch(gasUrl, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: {'Content-Type':'text/plain;charset=utf-8'},
     body: JSON.stringify(payload)
-  })
-  .then(() => {
-    document.getElementById('submittingOverlay').classList.add('hidden');
+  }).then(()=>{
+    if (overlay) overlay.classList.add('hidden');
     showView('view-success');
-    document.getElementById('emailStatusMsg').innerHTML =
-      '<span style="color:var(--color-success);">✓ 記錄已成功傳送至 Google Sheets，電郵已發送至 saiwanhsrecord@gmail.com</span>';
-  })
-  .catch(err => {
-    document.getElementById('submittingOverlay').classList.add('hidden');
+    const msg = document.getElementById('emailStatusMsg');
+    if (msg) msg.innerHTML = '<span style="color:#2d8a4e">✓ 已傳送至 Google Sheets，電郵已發送</span>';
+  }).catch(err=>{
+    if (overlay) overlay.classList.add('hidden');
     showView('view-success');
-    document.getElementById('emailStatusMsg').innerHTML =
-      `<span style="color:var(--color-error);">✗ 傳送失敗：${err.message}。請檢查 GAS 網址設定。</span>`;
+    const msg = document.getElementById('emailStatusMsg');
+    if (msg) msg.innerHTML = `<span style="color:#c41c1c">✗ 傳送失敗：${err.message}</span>`;
   });
 }
 
-// ─── PRINT ───────────────────────────────────────────────────────
 function printReport() {
   const data = CHECKLISTS[currentType];
   const name = document.getElementById('inspectorName').value || '—';
@@ -1684,47 +1552,95 @@ function printReport() {
   const ids = Object.keys(itemStatus);
   const pass = ids.filter(id => itemStatus[id] === 'pass').length;
   const fail = ids.filter(id => itemStatus[id] === 'fail').length;
-  const na   = ids.filter(id => itemStatus[id] === 'na').length;
+  const na = ids.filter(id => itemStatus[id] === 'na').length;
   const total = ids.length;
 
   let rows = '';
   let n = 0;
-  data.sections.forEach((sec, si) => {
-    rows += `<tr><td colspan="3" style="background:#e8e8e8;font-weight:700;padding:7px 10px;">${sec.heading}</td></tr>`;
+  data.sections.forEach(sec => {
+    rows += `<tr><td colspan="3" style="background:#f0f0f0;font-weight:700;padding:8px 12px;">${sec.heading}</td></tr>`;
     sec.items.forEach((text, ii) => {
-      const sid = `${si}-${ii}`;
+      const sid = `${data.sections.indexOf(sec)}-${ii}`;
       n++;
       const s = itemStatus[sid];
       const r = itemRemarks[sid] || '';
       const statusTxt = s === 'pass' ? '✓ 合格' : s === 'fail' ? '✗ 不合格' : s === 'na' ? '— 不適用' : '未填寫';
       const bg = s === 'pass' ? '#f0fdf4' : s === 'fail' ? '#fef2f2' : s === 'na' ? '#f9fafb' : '#fffbeb';
-      const sc = s === 'pass' ? '#16a34a' : s === 'fail' ? '#dc2626' : '#6b7280';
-      rows += `<tr style="background:${bg}"><td style="padding:7px 10px;text-align:center;color:#777;">${n}</td><td style="padding:7px 10px;">${text}${r ? '<br><small style=\'color:#666\'>備註：' + r + '</small>' : ''}</td><td style="padding:7px 10px;font-weight:700;color:${sc};">${statusTxt}</td></tr>`;
+      rows += `<tr style="background:${bg}"><td style="padding:8px 12px;width:36px;text-align:center;">${n}</td><td style="padding:8px 12px;">${text}${r ? '<br><small style="color:#666">備註：'+r+'</small>':''}</td><td style="padding:8px 12px;white-space:nowrap;font-weight:600;">${statusTxt}</td></tr>`;
     });
   });
 
-  const warnHtml = fail > 0
-    ? `<div class="pr-warn"><strong style="color:#dc2626;">⚠️ 警告：發現 ${fail} 項不合格！相關設備須立即停用並向上級主管匯報。</strong></div>`
-    : '';
+  const html = `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><title>${data.title} 巡查報告</title>
+  <style>body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;padding:24px;font-size:13px;color:#111;}
+  h1{font-size:18px;margin-bottom:4px;} .meta{font-size:12px;color:#555;margin-bottom:16px;}
+  .summary{display:flex;gap:16px;margin-bottom:16px;} .stat{padding:8px 16px;border-radius:8px;text-align:center;border:1px solid #ddd;}
+  .stat b{font-size:22px;display:block;} table{width:100%;border-collapse:collapse;} td,th{border:1px solid #ddd;} 
+  @media print{body{padding:0}}</style></head><body>
+  <h1>${data.emoji} ${data.title} — 月度巡查報告</h1>
+  <div class="meta">巡查人員：${name} &nbsp;|&nbsp; 部門：${dept} &nbsp;|&nbsp; 日期：${date} &nbsp;|&nbsp; 位置：${location}</div>
+  <div class="summary">
+    <div class="stat" style="background:#f0fdf4;border-color:#4ade80"><b style="color:#16a34a">${pass}</b>合格</div>
+    <div class="stat" style="background:#fef2f2;border-color:#fca5a5"><b style="color:#dc2626">${fail}</b>不合格</div>
+    <div class="stat" style="background:#f9fafb;border-color:#ddd"><b style="color:#6b7280">${na}</b>不適用</div>
+    <div class="stat" style="background:#eff6ff;border-color:#bfdbfe"><b style="color:#2563eb">${total}</b>總項目</div>
+  </div>
+  <table><thead><tr style="background:#f0f0f0"><th style="padding:8px 12px;width:36px">#</th><th style="padding:8px 12px">檢查項目</th><th style="padding:8px 12px;width:100px">結果</th></tr></thead>
+  <tbody>${rows}</tbody></table>
+  <p style="margin-top:20px;font-size:11px;color:#999;">報告生成時間：${new Date().toLocaleString('zh-Hant-HK')}</p>
+  <script>window.print();<\/script></body></html>`;
 
-  document.getElementById('print-report').innerHTML = `
-    <h1>${data.emoji} ${data.title} 月度巡查報告</h1>
-    <div class="pr-meta">巡查人員：<strong>${name}</strong> ｜ 部門：<strong>${dept}</strong> ｜ 日期：<strong>${date}</strong> ｜ 位置：<strong>${location}</strong></div>
-    ${warnHtml}
-    <div class="pr-summary">
-      <div class="pr-stat" style="background:#f0fdf4;border-color:#4ade80"><b style="color:#16a34a">${pass}</b>合格</div>
-      <div class="pr-stat" style="background:#fef2f2;border-color:#fca5a5"><b style="color:#dc2626">${fail}</b>不合格</div>
-      <div class="pr-stat" style="background:#f9fafb;border-color:#ccc"><b style="color:#6b7280">${na}</b>不適用</div>
-      <div class="pr-stat" style="background:#eff6ff;border-color:#bfdbfe"><b style="color:#2563eb">${total}</b>總項目</div>
-    </div>
-    <table>
-      <thead><tr><th style="width:36px;">#</th><th>檢查項目</th><th style="width:100px;">結果</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div class="pr-footer">報告生成時間：${new Date().toLocaleString('zh-Hant-HK')} · 職場安全月度巡查系統</div>
-  `;
-  window.print();
+  const w = window.open('', '_blank');
+  if (w) { w.document.write(html); w.document.close(); }
 }
+
 </script>
+
+  <!-- SETUP MODAL -->
+  <div class="modal-overlay hidden" id="setupModal" role="dialog" aria-modal="true">
+    <div class="setup-modal">
+      <div class="setup-header">
+        <h2>⚙️ 設定 Google Sheets 自動記錄</h2>
+        <p>完成設定後，每次提交將自動儲存至 Google Sheets 並發電郵至 saiwanhsrecord@gmail.com</p>
+      </div>
+      <div class="setup-body">
+        <div class="setup-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>開啟 Google Apps Script</h4>
+            <p>在 Google Spreadsheet 點擊「延伸功能 → Apps Script」</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>貼入腳本並部署</h4>
+            <p>貼入 <strong>inspection-gas-script.gs</strong> 內容，然後「部署 → 網頁應用程式」<br>執行身分：<strong>我</strong>｜存取權：<strong>任何人</strong></p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>貼入 Web App 網址</h4>
+            <div class="url-input-wrap">
+              <input type="url" class="url-input" id="gasUrlInput" placeholder="https://script.google.com/macros/s/…/exec">
+              <button class="url-save-btn" onclick="saveGasUrl()" type="button">儲存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="setup-footer">
+        <button class="btn-outline" onclick="closeSetupModal()" type="button" style="width:100%;text-align:center;">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMITTING OVERLAY -->
+  <div class="submitting-overlay hidden" id="submittingOverlay">
+    <div class="submitting-card">
+      <div class="spinner"></div>
+      <div style="font-size:var(--text-base);font-weight:600;">正在傳送記錄…</div>
+    </div>
+  </div>
+
 </body>
 </html>
